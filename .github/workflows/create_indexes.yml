@@ -31,5 +31,5 @@ jobs:
                   SEARCH_API_KEY: ${{ secrets.SEARCH_API_KEY }}
                   SEARCH_API_VERSION: ${{ secrets.SEARCH_API_VERSION }}
               run: |
-                  python main.py
+                  uv run python main.py
               working-directory: utility/indexer
