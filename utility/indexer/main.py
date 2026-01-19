@@ -27,6 +27,13 @@ def main():
     
     for idx in indexes:
         
+        # First we delete existing index
+        url = f"{search_endpoint}/indexes('{idx['name']}')?api-version={search_api_version}"
+
+        logging.info(f"Deleting index: {idx['name']}")
+
+        requests.delete(url=url,headers=headers)
+
         logging.info(f"Creating/Updating index: {idx['name']}")
 
         url = f"{search_endpoint}/indexes('{idx['name']}')?api-version={search_api_version}"
