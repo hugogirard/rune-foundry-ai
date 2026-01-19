@@ -69,7 +69,7 @@ def upload_documents(index_name:str, docs:list):
 
 def main():
     
-    documents = embed_document(lore_file_path,'content','content_vector')
+    documents = embed_document(lore_file_path,'description','description_vector')
 
     upload_documents("lore",documents)
 

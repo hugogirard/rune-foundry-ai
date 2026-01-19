@@ -1,35 +1,70 @@
 name: Create Indexes
 
 on:
-    workflow_dispatch:
+  workflow_dispatch:
 
 jobs:
-    create-indexes:
-        runs-on: ubuntu-latest
+  create-indexes:
+    runs-on: ubuntu-latest
 
-        steps:
-            - name: Checkout code
-              uses: actions/checkout@v6
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
 
-            - name: Set up Python
-              uses: actions/setup-python@v6
-              with:
-                  python-version: "3.11"
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
 
-            - name: Install the latest version of uv
-              uses: astral-sh/setup-uv@v7
+      - name: Install the latest version of uv
+        uses: astral-sh/setup-uv@v7
 
-            - name: Install dependencies
-              run: |
-                  uv sync
-              working-directory: utility/indexer
+      - name: Install dependencies
+        run: |
+          uv sync
+        working-directory: utility/indexer
 
-            - name: Run index creation script
-              env:
-                  # Add your environment variables here
-                  SEARCH_ENDPOINT: ${{ secrets.SEARCH_ENDPOINT }}
-                  SEARCH_API_KEY: ${{ secrets.SEARCH_API_KEY }}
-                  SEARCH_API_VERSION: ${{ secrets.SEARCH_API_VERSION }}
-              run: |
-                  uv run python main.py
-              working-directory: utility/indexer
+      - name: Run index creation script
+        env:
+          # Add your environment variables here
+          SEARCH_ENDPOINT: ${{ secrets.SEARCH_ENDPOINT }}
+          SEARCH_API_KEY: ${{ secrets.SEARCH_API_KEY }}
+          SEARCH_API_VERSION: ${{ secrets.SEARCH_API_VERSION }}
+        run: |
+          uv run python main.py
+        working-directory: utility/indexer
+
+  load_indexes:
+    needs: create-indexes
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+
+      - name: Install the latest version of uv
+        uses: astral-sh/setup-uv@v7
+
+      - name: Install dependencies
+        run: |
+          uv sync
+        working-directory: utility/loader
+
+      - name: Run index creation script
+        env:
+          # Add your environment variables here
+          SEARCH_ENDPOINT: ${{ secrets.SEARCH_ENDPOINT }}
+          SEARCH_API_KEY: ${{ secrets.SEARCH_API_KEY }}
+          SEARCH_API_VERSION: ${{ secrets.SEARCH_API_VERSION }}
+          OPENAI_ENDPOINT: ${{ secrets.OPENAI_ENDPOINT }}
+          OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
+          EMBEDDING_OPENAI_DEPLOYMENT: ${{ secrets.EMBEDDING_OPENAI_DEPLOYMENT }}
+          OPENAI_API_VERSION: ${{ secrets.OPENAI_API_VERSION }}
+        run: |
+          uv run python main.py
+        working-directory: utility/loader

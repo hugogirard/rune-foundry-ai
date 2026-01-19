@@ -3,9 +3,11 @@
         "id": "quest_alduin_bane_001",
         "type": "quest",
         "title": "Alduin's Bane",
-        "content": "Alduin's Bane is a main story quest in Skyrim. Travel to the Throat of the World, the highest peak in Tamriel. Use the Elder Scroll at the Time Wound to learn the Dragonrend shout from the ancient Nord heroes. This shout forces dragons to land, making them vulnerable. Prerequisites include completing 'The Way of the Voice' and 'Elder Knowledge' quests. Recommended level is 15+. The quest teaches you all three words of Dragonrend instantly. After learning the shout, you'll face Alduin in an epic battle at the summit.",
+        "description": "Travel to the Throat of the World, the highest peak in Tamriel. Use the Elder Scroll at the Time Wound to learn the Dragonrend shout from the ancient Nord heroes. This shout forces dragons to land, making them vulnerable. After learning the shout, you'll face Alduin in an epic battle at the summit.",
         "category": "main_quest",
+        "location": "Throat of the World",
         "level_requirement": 15,
+        "difficulty": "Hard",
         "prerequisites": [
             "The Way of the Voice",
             "Elder Knowledge"
@@ -13,187 +15,267 @@
         "rewards": [
             "Dragonrend Shout"
         ],
-        "location": "Throat of the World"
+        "related_npcs": [
+            "Alduin",
+            "Paarthurnax"
+        ],
+        "related_items": [
+            "Elder Scroll"
+        ],
+        "tips": "Make sure to have strong fire resistance and health potions before confronting Alduin."
     },
     {
         "id": "quest_thieves_guild_001",
         "type": "quest",
         "title": "Joining the Thieves Guild",
-        "content": "The Thieves Guild is located in the Ratway beneath Riften. To join, speak to Brynjolf in Riften's marketplace during the day. He'll challenge you to prove your skills by framing Brand-Shei. The guild has fallen on hard times and lost Nocturnal's favor. Complete the questline to restore the guild's luck, become Guildmaster, and gain access to the Nightingale armor set. The guild specializes in stealth, lockpicking, and pickpocketing. Key NPCs include Mercer Frey, Karliah, and Vex. No level requirement to join.",
+        "description": "The Thieves Guild is located in the Ratway beneath Riften. Speak to Brynjolf in Riften's marketplace during the day. He'll challenge you to prove your skills by framing Brand-Shei. The guild has fallen on hard times and lost Nocturnal's favor. Complete the questline to restore the guild's luck and become Guildmaster.",
         "category": "faction_quest",
+        "location": "Riften",
         "level_requirement": 1,
+        "difficulty": "Easy",
         "prerequisites": [],
         "rewards": [
             "Thieves Guild Membership",
             "Access to Ragged Flagon",
             "Fence Services"
         ],
-        "location": "Riften"
+        "related_npcs": [
+            "Brynjolf",
+            "Mercer Frey",
+            "Karliah",
+            "Vex"
+        ],
+        "related_items": [
+            "Nightingale Armor Set"
+        ],
+        "tips": "High Sneak, Lockpicking, and Pickpocket skills are essential for guild quests."
     },
     {
         "id": "item_nightingale_armor_001",
         "type": "item",
         "title": "Nightingale Armor Set",
-        "content": "The Nightingale Armor is a unique light armor set received during the Thieves Guild questline. The full set includes cuirass, boots, gloves, and hood. At level 32+, the armor provides maximum benefits: 35 armor rating per piece, Fortify Stamina, Frost Resist 50%, and various Fortify skills (Lockpicking +25, Pickpocket +25, Stamina regeneration +100%). The armor scales with your level when received. It's one of the best stealth archer armor sets in the game. Cannot be crafted or improved at workbenches normally. Pairs perfectly with the Nightingale Bow.",
+        "description": "A unique light armor set received during the Thieves Guild questline. The full set includes cuirass, boots, gloves, and hood. At level 32+, provides maximum benefits including 35 armor rating per piece, Fortify Stamina, Frost Resist 50%, and various skill bonuses. One of the best stealth archer armor sets in the game.",
         "category": "armor",
-        "weight": 10.0,
-        "value": 2000,
-        "enchantments": [
-            "Fortify Stamina",
-            "Frost Resistance",
-            "Fortify Lockpicking"
+        "location": "Nightingale Hall",
+        "level_requirement": 32,
+        "difficulty": "N/A",
+        "prerequisites": [
+            "Complete Trinity Restored quest"
         ],
-        "how_to_obtain": "Complete 'Trinity Restored' quest in Thieves Guild questline"
+        "rewards": [],
+        "related_npcs": [
+            "Karliah",
+            "Brynjolf"
+        ],
+        "related_items": [
+            "Nightingale Bow",
+            "Nightingale Blade"
+        ],
+        "tips": "The armor scales with your level when received, so wait until level 32+ for maximum stats. Pairs perfectly with stealth archer builds."
     },
     {
         "id": "item_dawnbreaker_001",
         "type": "item",
         "title": "Dawnbreaker",
-        "content": "Dawnbreaker is a unique one-handed sword obtained from Meridia's Daedric quest 'The Break of Dawn'. It deals 12 base damage plus 10-15 fire damage to undead. Has a chance to cause a fiery explosion that turns and/or destroys nearby undead. Weighs 10 units, valued at 740 gold. The sword is particularly effective against Draugr, vampires, and dragon priests. To start the quest, find Meridia's Beacon in any dungeon chest after level 12, then take it to the Statue to Meridia west of Solitude. The quest involves clearing Kilkreath Temple of Malkoran and his shades.",
+        "description": "A unique one-handed sword obtained from Meridia's Daedric quest. Deals 12 base damage plus 10-15 fire damage to undead. Has a chance to cause a fiery explosion that turns and/or destroys nearby undead. Particularly effective against Draugr, vampires, and dragon priests.",
         "category": "weapon",
-        "weapon_type": "one_handed_sword",
-        "base_damage": 12,
-        "weight": 10.0,
-        "value": 740,
-        "enchantments": [
-            "Burns undead",
-            "Explosion effect"
+        "location": "Kilkreath Temple",
+        "level_requirement": 12,
+        "difficulty": "Medium",
+        "prerequisites": [
+            "Find Meridia's Beacon"
         ],
-        "how_to_obtain": "Complete Meridia's quest 'The Break of Dawn'"
+        "rewards": [],
+        "related_npcs": [
+            "Meridia"
+        ],
+        "related_items": [
+            "Meridia's Beacon"
+        ],
+        "tips": "Essential weapon for Dawnguard questline and clearing Draugr crypts. The explosion effect can chain-clear entire rooms of undead."
     },
     {
         "id": "npc_paarthurnax_001",
         "type": "npc",
         "title": "Paarthurnax",
-        "content": "Paarthurnax is an ancient dragon who serves as the leader of the Greybeards. He resides at the peak of the Throat of the World. Once Alduin's lieutenant, he betrayed the dragons to help humans learn the Thu'um. He is meditative, philosophical, and struggles daily with his dragon nature to dominate. Teaches you the Fire Breath shout and the final word of Fus Ro Dah. Famous quote: 'What is better - to be born good, or to overcome your evil nature through great effort?' The Blades will ask you to kill him, creating a moral dilemma. Voiced by Charles Martinet (Mario).",
+        "description": "An ancient dragon who serves as the leader of the Greybeards. He resides at the peak of the Throat of the World. Once Alduin's lieutenant, he betrayed the dragons to help humans learn the Thu'um. He is meditative, philosophical, and struggles daily with his dragon nature to dominate. The Blades will ask you to kill him, creating a moral dilemma.",
         "category": "character",
-        "faction": "Greybeards",
         "location": "Throat of the World",
-        "voice_actor": "Charles Martinet",
-        "teaches": [
-            "Fire Breath",
+        "level_requirement": 0,
+        "difficulty": "N/A",
+        "prerequisites": [
+            "Complete The Throat of the World quest"
+        ],
+        "rewards": [
+            "Fire Breath shout",
             "Fus Ro Dah (3rd word)"
-        ]
+        ],
+        "related_npcs": [
+            "Greybeards",
+            "Alduin",
+            "Delphine"
+        ],
+        "related_items": [
+            "Elder Scroll"
+        ],
+        "tips": "Famous quote: 'What is better - to be born good, or to overcome your evil nature through great effort?' Most players choose to spare him."
     },
     {
         "id": "npc_lydia_001",
         "type": "npc",
         "title": "Lydia",
-        "content": "Lydia is a Nord housecarl appointed to serve the Thane of Whiterun. She becomes your follower after completing 'Dragon Rising' and purchasing Breezehome. Famous for her unenthusiastic line 'I am sworn to carry your burdens.' She's a one-handed warrior who specializes in heavy armor. Maximum level is 50. Can be married after completing the Temple of Mara quest. Essential until you marry her or complete the main quest. Good for tanking damage in early game. Often gets in your way during dungeon crawling, a common source of player frustration.",
+        "description": "A Nord housecarl appointed to serve the Thane of Whiterun. She becomes your follower after completing Dragon Rising and purchasing Breezehome. Famous for her unenthusiastic line 'I am sworn to carry your burdens.' She's a one-handed warrior who specializes in heavy armor with a maximum level of 50.",
         "category": "character",
-        "role": "housecarl",
         "location": "Dragonsreach, Whiterun",
-        "combat_style": "One-handed + Heavy Armor",
-        "max_level": 50,
-        "marriage": true
+        "level_requirement": 0,
+        "difficulty": "N/A",
+        "prerequisites": [
+            "Complete Dragon Rising",
+            "Become Thane of Whiterun"
+        ],
+        "rewards": [],
+        "related_npcs": [
+            "Jarl Balgruuf"
+        ],
+        "related_items": [
+            "Breezehome"
+        ],
+        "tips": "Can be married after completing the Temple of Mara quest. Good for tanking damage in early game but often gets in your way during dungeon crawling."
     },
     {
         "id": "alchemy_invisibility_001",
-        "type": "alchemy",
-        "title": "Invisibility Potion Recipe",
-        "content": "Invisibility potions make you completely invisible for 30-60 seconds depending on alchemy skill. Useful for stealth characters to escape combat or sneak past enemies. Recipe requires two of these ingredients: Chaurus Eggs, Crimson Nirnroot, Ice Wraith Teeth, Luna Moth Wing, Nirnroot, Vampire Dust. Most common combination is Chaurus Eggs + Luna Moth Wing. Chaurus eggs found in Falmer caves. Luna Moth Wings caught at night near water. At Alchemy 100 with perks, potions last over 60 seconds. Stacks with Muffle enchantment for ultimate stealth.",
+        "type": "recipe",
+        "title": "Invisibility Potion",
+        "description": "Makes you completely invisible for 30-60 seconds depending on alchemy skill. Useful for stealth characters to escape combat or sneak past enemies. Most common combination is Chaurus Eggs + Luna Moth Wing. At Alchemy 100 with perks, potions last over 60 seconds.",
         "category": "potion",
-        "effect": "Invisibility",
-        "ingredients": [
+        "location": "Any Alchemy Lab",
+        "level_requirement": 0,
+        "difficulty": "Easy",
+        "prerequisites": [
+            "Alchemy skill"
+        ],
+        "rewards": [],
+        "related_npcs": [],
+        "related_items": [
             "Chaurus Eggs",
             "Luna Moth Wing",
             "Ice Wraith Teeth",
             "Nirnroot",
             "Vampire Dust"
         ],
-        "duration_base": 30,
-        "recommended_for": [
-            "Stealth builds",
-            "Thieves Guild quests"
-        ]
+        "tips": "Chaurus eggs found in Falmer caves. Luna Moth Wings caught at night near water. Stacks with Muffle enchantment for ultimate stealth."
     },
     {
         "id": "shout_dragonrend_001",
         "type": "shout",
         "title": "Dragonrend (Joor Zah Frul)",
-        "content": "Dragonrend is a unique shout that forces dragons to land and drains their stamina. The three words mean 'Mortal', 'Finite', and 'Temporary'. You learn all three words instantly during the quest 'Alduin's Bane' from the spirits of ancient Nord heroes. Unlike other shouts, it cannot be learned from word walls. Effects last 12 seconds per word (36 seconds total). Essential for fighting Alduin and other aerial dragons. Cooldown is 10/15/20 seconds per word used. The shout embodies the concept of mortality, which dragons cannot truly understand, causing them psychic pain.",
-        "category": "shout",
-        "words": [
-            "Joor",
-            "Zah",
-            "Frul"
+        "description": "A unique shout that forces dragons to land and drains their stamina. The three words mean 'Mortal', 'Finite', and 'Temporary'. You learn all three words instantly during the quest Alduin's Bane from the spirits of ancient Nord heroes. Essential for fighting Alduin and other aerial dragons. Effects last 36 seconds total with 20 second cooldown.",
+        "category": "thu'um",
+        "location": "Time Wound, Throat of the World",
+        "level_requirement": 15,
+        "difficulty": "N/A",
+        "prerequisites": [
+            "Complete Alduin's Bane quest"
         ],
-        "translation": [
-            "Mortal",
-            "Finite",
-            "Temporary"
+        "rewards": [],
+        "related_npcs": [
+            "Ancient Nord Heroes",
+            "Alduin"
         ],
-        "effect": "Forces dragons to land",
-        "cooldown": "10/15/20 seconds",
-        "how_to_learn": "Story quest 'Alduin's Bane' only"
+        "related_items": [
+            "Elder Scroll"
+        ],
+        "tips": "Unlike other shouts, cannot be learned from word walls. The shout embodies mortality, which dragons cannot understand, causing them psychic pain."
     },
     {
         "id": "lore_dark_brotherhood_001",
-        "type": "lore",
+        "type": "faction",
         "title": "The Dark Brotherhood",
-        "content": "The Dark Brotherhood is an ancient guild of assassins who worship the Dread Father Sithis and his bride, the Night Mother. Members follow the Five Tenets: obey the Night Mother, never dishonor the Brotherhood, never disobey a superior, never steal from a Brotherhood member, and never kill a Brotherhood member. The sanctuary in Skyrim is located near Falkreath. To join, complete the innocence quest 'Innocence Lost' in Windhelm by killing Grelod the Kind, then sleep. Astrid will kidnap you. The questline involves contracts, betrayal, and ultimately becoming Listener. The phrase 'What is the music of life?' with answer 'Silence, my brother' is their greeting.",
+        "description": "An ancient guild of assassins who worship the Dread Father Sithis and his bride, the Night Mother. Members follow the Five Tenets. The sanctuary is located near Falkreath. To join, complete Innocence Lost in Windhelm by killing Grelod the Kind, then sleep. The questline involves contracts, betrayal, and ultimately becoming Listener.",
         "category": "faction",
-        "deity": "Sithis",
-        "leader": "Night Mother / Astrid",
         "location": "Dark Brotherhood Sanctuary, Falkreath Hold",
-        "how_to_join": "Complete 'Innocence Lost' quest, then sleep"
+        "level_requirement": 0,
+        "difficulty": "Medium",
+        "prerequisites": [
+            "Complete Innocence Lost"
+        ],
+        "rewards": [
+            "Ancient Shrouded Armor",
+            "Shadowmere",
+            "Blade of Woe"
+        ],
+        "related_npcs": [
+            "Astrid",
+            "Night Mother",
+            "Cicero",
+            "Nazir"
+        ],
+        "related_items": [
+            "Ancient Shrouded Armor",
+            "Blade of Woe"
+        ],
+        "tips": "Greeting phrase: 'What is the music of life?' Answer: 'Silence, my brother'. High Sneak skill recommended."
     },
     {
         "id": "lore_dwemer_001",
         "type": "lore",
         "title": "The Dwemer (Dwarves)",
-        "content": "The Dwemer, also called Deep Elves or Dwarves, were an ancient race of elves who disappeared mysteriously in the First Era. Despite the name, they were not short. They were master engineers and metallurgists who created complex animunculi (robots), advanced machinery, and architectural marvels. Their ruins are filled with steam-powered traps, centurions, spheres, and spiders. They disappeared instantly during the Battle of Red Mountain when their chief Tonal Architect Kagrenac struck the Heart of Lorkhan with Keening. Only one Dwemer, Yagrum Bagarn, survived because he was in another dimension. Dwemer artifacts and metal are highly valuable.",
+        "description": "The Dwemer, also called Deep Elves or Dwarves, were an ancient race of elves who disappeared mysteriously in the First Era. Despite the name, they were not short. They were master engineers who created complex animunculi, advanced machinery, and architectural marvels. They disappeared instantly during the Battle of Red Mountain when Kagrenac struck the Heart of Lorkhan.",
         "category": "history",
-        "race": "Mer (Elves)",
-        "era": "First Era",
-        "known_for": [
-            "Engineering",
-            "Animunculi",
-            "Mysterious disappearance"
+        "location": "Dwemer Ruins, Blackreach, Markarth",
+        "level_requirement": 0,
+        "difficulty": "N/A",
+        "prerequisites": [],
+        "rewards": [],
+        "related_npcs": [
+            "Yagrum Bagarn (Morrowind)"
         ],
-        "related_locations": [
-            "Blackreach",
-            "Markarth",
-            "Dwemer Ruins"
-        ]
+        "related_items": [
+            "Dwemer Metal",
+            "Dwemer Cogs",
+            "Centurion Dynamo Core"
+        ],
+        "tips": "Dwemer ruins contain valuable loot and are filled with mechanical enemies. Bring lockpicks and be prepared for tough fights."
     },
     {
         "id": "enemy_dragon_priest_001",
         "type": "enemy",
-        "title": "Dragon Priest Strategy",
-        "content": "Dragon Priests are powerful undead spellcasters who served dragons in ancient times. Each wears a unique mask with special enchantments. They are resistant to frost (50-75%) and use powerful destruction magic, primarily fire and lightning. Combat strategy: Maintain distance, use fire resistance potions/enchantments, equip magic resistance gear (80%+ recommended). The Spellbreaker shield blocks spells effectively. Mark for Death shout reduces their armor. They can teleport and summon Draugr. Avoid fighting in enclosed spaces. Recommended level 30+. Each mask provides unique bonuses - Morokei gives +100% magicka regen, Krosis gives +20% to Lockpicking/Archery/Alchemy. There are 14 masks total including Konahrik.",
+        "title": "Dragon Priest",
+        "description": "Powerful undead spellcasters who served dragons in ancient times. Each wears a unique mask with special enchantments. They are resistant to frost (50-75%) and use powerful destruction magic, primarily fire and lightning. Can teleport and summon Draugr. There are 14 masks total including Konahrik.",
         "category": "enemy",
+        "location": "Various crypts and dungeons",
+        "level_requirement": 30,
         "difficulty": "Very Hard",
-        "resistances": [
-            "Frost 50-75%",
-            "Poison Immune"
-        ],
-        "weaknesses": [
-            "Fire damage"
-        ],
-        "recommended_level": 30,
-        "drops": [
+        "prerequisites": [],
+        "rewards": [
             "Dragon Priest Mask",
             "Soul Gems",
             "Ebony Weapons"
-        ]
+        ],
+        "related_npcs": [],
+        "related_items": [
+            "Dragon Priest Masks",
+            "Konahrik"
+        ],
+        "tips": "Use fire resistance potions, magic resistance gear (80%+), and Spellbreaker shield. Mark for Death shout reduces their armor. Avoid enclosed spaces."
     },
     {
         "id": "build_stealth_archer_001",
         "type": "build",
-        "title": "Stealth Archer Build Guide",
-        "content": "The Stealth Archer is one of the most powerful builds in Skyrim. Key skills: Archery (primary), Sneak (primary), Light Armor, Alchemy, Enchanting. Perks: Stealth 5/5, Deadly Aim, Overdraw 5/5, Critical Shot, Quick Shot. Armor: Nightingale set or Krosis mask + Ancient Shrouded cowl. Weapons: Nightingale Bow or Auriel's Bow. Enchantments: Fortify Archery on helm, gloves, ring, necklace (160% total damage boost). Craft Fortify Archery potions (Canis Root + Juniper Berries). Strategy: sneak, shoot, sneak back, repeat. At high levels you'll one-shot most enemies with 3x sneak attack bow damage. Join Thieves Guild and Dark Brotherhood for gear. Stone: Thief Stone early, Shadow Stone late game.",
+        "title": "Stealth Archer Build",
+        "description": "One of the most powerful builds in Skyrim. Focus on Archery and Sneak as primary skills, with Light Armor, Alchemy, and Enchanting as support. Use Nightingale set or Krosis mask with Ancient Shrouded cowl. Enchant gear with Fortify Archery for 160% total damage boost. At high levels you'll one-shot most enemies with 3x sneak attack bow damage.",
         "category": "character_build",
-        "primary_skills": [
-            "Archery",
-            "Sneak"
+        "location": "N/A",
+        "level_requirement": 0,
+        "difficulty": "Easy to Master",
+        "prerequisites": [],
+        "rewards": [],
+        "related_npcs": [],
+        "related_items": [
+            "Nightingale Bow",
+            "Auriel's Bow",
+            "Nightingale Armor"
         ],
-        "secondary_skills": [
-            "Light Armor",
-            "Alchemy",
-            "Enchanting"
-        ],
-        "recommended_race": "Bosmer (Wood Elf) or Khajiit",
-        "difficulty": "Easy to Master"
+        "tips": "Recommended race: Bosmer or Khajiit. Use Thief Stone early game, Shadow Stone late game. Join Thieves Guild and Dark Brotherhood for gear. Craft Fortify Archery potions with Canis Root + Juniper Berries."
     }
 ]
