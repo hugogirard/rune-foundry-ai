@@ -134,6 +134,14 @@ module web 'modules/webapp.bicep' = {
   }
 }
 
+module rbac 'modules/rbac.bicep' = {
+  scope: rg
+  params: {
+    containerRegistryResourceId: registry.outputs.resourceId
+    webAppPrincipalIds: web.outputs.principalIds
+  }
+}
+
 output resourceGroupName string = rg.name
 output acrRegistryName string = registry.outputs.name
 output foundryResourceName string = foundry.outputs.resourceName

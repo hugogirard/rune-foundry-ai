@@ -60,3 +60,7 @@ resource webMageAPI 'Microsoft.Web/sites@2024-11-01' = {
 
 output loreAgentResourceName string = webAgent.name
 output webMageApiResourceName string = webMageAPI.name
+output principalIds array = [
+  webAgent.identity.principalId
+  webMageAPI.identity.principalId
+]
