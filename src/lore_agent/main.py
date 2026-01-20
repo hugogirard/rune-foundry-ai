@@ -1,12 +1,12 @@
 from fastapi import FastAPI
-from bootstrapper import Boostrapper
+from bootstrapper import Bootstrapper
 from fastapi.responses import RedirectResponse
 from routes import routes
 from config import config
 import logging
 import sys
 
-app = Boostrapper().run()
+app = Bootstrapper().run()
 
 logging.basicConfig(
     level=logging.INFO,

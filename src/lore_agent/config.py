@@ -11,4 +11,8 @@ class Config(BaseSettings):
 
     azure_openai_endpoint: str
 
+    azure_openai_version: str
+
+    openai_chat_deployment_name: str
+
 config = Config()
