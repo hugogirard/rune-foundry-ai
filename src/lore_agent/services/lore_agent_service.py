@@ -1,6 +1,7 @@
 from azure.identity import DefaultAzureCredential
 from agent_framework.azure import AzureOpenAIResponsesClient
 from config import Config
+from typing import AsyncGenerator, Any
 import logging
 
 class LoreAgentService:
@@ -15,6 +16,10 @@ class LoreAgentService:
         )                
         self.logger = logging.getLogger(__name__)
 
-    async def get_lore_information(self,question:str) -> str:
-        result = await self.agent.get_response(question)                
-        return result.text
+    async def get_lore_information(self,question:str) -> AsyncGenerator[str, None]:
+
+        complete_response = ""
+        async for chunk in self.agent.get_streaming_response(question):
+            if chunk.text:
+                complete_response += chunk.text
+                yield chunk.text
