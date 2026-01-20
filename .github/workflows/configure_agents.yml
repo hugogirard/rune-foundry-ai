@@ -1,0 +1,33 @@
+name: Configure Agents
+
+on:
+    workflow_dispatch:
+
+jobs:
+    create-indexes:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v6
+
+            - name: Set up Python
+              uses: actions/setup-python@v6
+              with:
+                  python-version: "3.11"
+
+            - name: Install the latest version of uv
+              uses: astral-sh/setup-uv@v7
+
+            - name: Install dependencies
+              run: |
+                  uv sync
+              working-directory: utility/agentConfiguration
+
+            - name: Run index creation script
+              env:
+                  # Add your environment variables here
+                  AZURE_AI_FOUNDRY_ENDPOINT: ${{ secrets.SEARCH_ENDPOINT }}
+              run: |
+                  uv run python main.py
+              working-directory: utility/agentConfiguration

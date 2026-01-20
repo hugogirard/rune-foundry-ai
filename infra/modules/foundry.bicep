@@ -30,4 +30,17 @@ resource account 'Microsoft.CognitiveServices/accounts@2025-04-01-preview' = {
   }
 }
 
+resource project 'Microsoft.CognitiveServices/accounts/projects@2025-04-01-preview' = {
+  parent: account
+  name: 'tamriel'
+  location: location
+  identity: {
+    type: 'SystemAssigned'
+  }
+  properties: {
+    description: 'Tamriel Agents Demo'
+    displayName: 'Tamriel'
+  }
+}
+
 output resourceName string = account.name
