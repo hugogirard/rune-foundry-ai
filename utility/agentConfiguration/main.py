@@ -51,10 +51,10 @@ async def main():
     for agent_class in agents:
         try:
             agent = agent_class()
-            print(f"Configuring {agent.__name__}")
+            print(f"Configuring {agent_class.__name__}")
             await agent.configure(project,chat_completion_model)
         except Exception as e:
-            print(f"Error configuring {agent.__name__}")
+            print(f"Error configuring {agent_class.__name__}")
             print(f"Exception: {e}")
 
     print(len(agents))
