@@ -35,5 +35,6 @@ jobs:
           AZURE_AI_FOUNDRY_ENDPOINT: ${{ secrets.FOUNDRY_PROJECT_ENDPOINT }}
           AZURE_OPENAI_CHAT_MODEL_COMPLETION: ${{ secrets.CHAT_COMPLETION_MODEL_DEPLOYMENT }}
         run: |
+          echo "Endpoint starts with: ${AZURE_AI_FOUNDRY_ENDPOINT:0:8}"
           uv run python main.py
         working-directory: utility/agentConfiguration
