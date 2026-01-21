@@ -48,8 +48,9 @@ async def main():
 
     chat_completion_model = os.getenv('AZURE_OPENAI_CHAT_MODEL_COMPLETION')
 
-    for agent in agents:
+    for agent_class in agents:
         try:
+            agent = agent_class()
             print(f"Configuring {agent.__name__}")
             await agent.configure(project,chat_completion_model)
         except Exception as e:
