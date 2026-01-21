@@ -9,7 +9,7 @@ from azure.ai.projects.models import (
 
 class MageGuildAgent(AgentConfiguration):
 
-    async def configure(project_client:AIProjectClient,chat_completion_model:str):
+    async def configure(self,project_client:AIProjectClient,chat_completion_model:str):
 
         definition = PromptAgentDefinition(
             model=chat_completion_model,
