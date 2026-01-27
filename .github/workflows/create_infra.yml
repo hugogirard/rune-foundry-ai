@@ -42,7 +42,7 @@ jobs:
                   echo "chatCompletionModelDeployment=$(jq -r '.chatCompletionModelDeployment.value' outputs.json)" >> $GITHUB_OUTPUT
                   echo "webMageApiResourceName=$(jq -r '.webMageApiResourceName.value' outputs.json)" >> $GITHUB_OUTPUT
                   echo "webApiMageEndpoint=$(jq -r '.webApiMageEndpoint.value' outputs.json)" >> $GITHUB_OUTPUT
-
+                  echo "storageBlobEndpoint=$(jq -r '.storageBlobEndpoint.value' outputs.json)" >> $GITHUB_OUTPUT
                   echo "cosmosDbAccountName=$(jq -r '.cosmosDbAccountName.value' outputs.json)" >> $GITHUB_OUTPUT
                   echo "skyrimDatabaseName=$(jq -r '.skyrimDatabaseName.value' outputs.json)" >> $GITHUB_OUTPUT
                   echo "skyrimContaineName=$(jq -r '.skyrimContaineName.value' outputs.json)" >> $GITHUB_OUTPUT
@@ -75,3 +75,4 @@ jobs:
                   gh secret set SKYRIM_DATABASE_NAME --body "${{ steps.createResources.outputs.skyrimDatabaseName }}"
                   gh secret set SKYRIM_CONTAINE_NAME --body "${{ steps.createResources.outputs.skyrimContaineName }}"
                   gh secret set COSMOSDB_ACCOUNT_NAME --body "${{ steps.createResources.outputs.cosmosDbAccountName }}"
+                  gh secret set STORAGE_BLOB_ENDPOINT --body "${{ steps.createResources.outputs.storageBlobEndpoint }}"

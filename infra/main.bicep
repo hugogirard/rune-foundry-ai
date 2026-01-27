@@ -134,6 +134,14 @@ module web 'modules/webapp.bicep' = {
   }
 }
 
+module storage 'modules/storage.bicep' = {
+  scope: rg
+  params: {
+    location: resourceLocation
+    storageResourceName: 'str${replace(suffix,'-','')}'
+  }
+}
+
 module rbac 'modules/rbac.bicep' = {
   scope: rg
   params: {
@@ -150,6 +158,7 @@ output loreAgentResourceName string = web.outputs.loreAgentResourceName
 output webMageApiResourceName string = web.outputs.webMageApiResourceName
 output webApiMageEndpoint string = web.outputs.webApiMageEndpoint
 output chatCompletionModelDeployment string = chatCompleteionDeploymentName
+output storageBlobEndpoint string = storage.outputs.blobEndpoint
 
 output cosmosDbAccountName string = cosmosdb.outputs.cosmosDbAccountName
 output skyrimDatabaseName string = cosmosdb.outputs.skyrimDatabaseName
