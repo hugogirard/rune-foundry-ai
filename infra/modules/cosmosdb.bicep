@@ -73,7 +73,7 @@ resource cosmosDB 'Microsoft.DocumentDB/databaseAccounts@2025-05-01-preview' = {
   }
 }
 
-resource db 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2025-11-01-preview' = {
+resource dbChat 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2025-11-01-preview' = {
   parent: cosmosDB
   name: 'conversation'
   properties: {
@@ -83,8 +83,67 @@ resource db 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2025-11-01-previ
   }
 }
 
+resource dbSkyrim 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases@2025-11-01-preview' = {
+  parent: cosmosDB
+  name: 'skyrim'
+  properties: {
+    resource: {
+      id: 'skyrim'
+    }
+  }
+}
+
 resource container 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers@2025-11-01-preview' = {
-  parent: db
+  parent: dbSkyrim
+  name: 'crime'
+  properties: {
+    resource: {
+      id: 'crime'
+      partitionKey: {
+        paths: [
+          '/crimeType'
+        ]
+        kind: 'Hash'
+      }
+      vectorEmbeddingPolicy: {
+        vectorEmbeddings: [
+          {
+            dataType: 'float32'
+            dimensions: 1536
+            distanceFunction: 'cosine'
+            path: '/descriptionVector'
+          }
+        ]
+      }
+      fullTextPolicy: {
+        defaultLanguage: 'en-US'
+        fullTextPaths: [
+          {
+            language: 'en-US'
+            path: '/crimeName'
+          }
+          {
+            language: 'en-US'
+            path: '/description'
+          }
+        ]
+      }
+      indexingPolicy: {
+        fullTextIndexes: [
+          {
+            path: '/description'
+          }
+          {
+            path: '/crimeName'
+          }
+        ]
+      }
+    }
+  }
+}
+
+resource containerChat 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers@2025-11-01-preview' = {
+  parent: dbChat
   name: 'thread'
   properties: {
     resource: {
@@ -95,39 +154,6 @@ resource container 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/container
         ]
         kind: 'Hash'
       }
-      // vectorEmbeddingPolicy: {
-      //   vectorEmbeddings: [
-      //     {
-      //       dataType: 'float32'
-      //       dimensions: 1536
-      //       distanceFunction: 'cosine'
-      //       path: '/descriptionVector'
-      //     }
-      //   ]
-      // }
-      // fullTextPolicy: {
-      //   defaultLanguage: 'en-US'
-      //   fullTextPaths: [
-      //     {
-      //       language: 'en-US'
-      //       path: '/crimeName'
-      //     }
-      //     {
-      //       language: 'en-US'
-      //       path: '/description'
-      //     }
-      //   ]
-      // }
-      // indexingPolicy: {
-      //   fullTextIndexes: [
-      //     {
-      //       path: '/description'
-      //     }
-      //     {
-      //       path: '/crimeName'
-      //     }
-      //   ]
-      // }
     }
   }
 }
