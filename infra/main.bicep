@@ -150,3 +150,7 @@ output loreAgentResourceName string = web.outputs.loreAgentResourceName
 output webMageApiResourceName string = web.outputs.webMageApiResourceName
 output webApiMageEndpoint string = web.outputs.webApiMageEndpoint
 output chatCompletionModelDeployment string = chatCompleteionDeploymentName
+
+output cosmosDbAccountName string = cosmosdb.outputs.cosmosDbAccountName
+output skyrimDatabaseName string = cosmosdb.outputs.skyrimDatabaseName
+output skyrimContaineName string = cosmosdb.outputs.skyrimContaineName

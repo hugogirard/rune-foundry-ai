@@ -43,6 +43,22 @@ jobs:
                   echo "webMageApiResourceName=$(jq -r '.webMageApiResourceName.value' outputs.json)" >> $GITHUB_OUTPUT
                   echo "webApiMageEndpoint=$(jq -r '.webApiMageEndpoint.value' outputs.json)" >> $GITHUB_OUTPUT
 
+                  echo "cosmosDbAccountName=$(jq -r '.cosmosDbAccountName.value' outputs.json)" >> $GITHUB_OUTPUT
+                  echo "skyrimDatabaseName=$(jq -r '.skyrimDatabaseName.value' outputs.json)" >> $GITHUB_OUTPUT
+                  echo "skyrimContaineName=$(jq -r '.skyrimContaineName.value' outputs.json)" >> $GITHUB_OUTPUT
+
+            - name: Get CosmosDB Connection String
+              id: getCosmosConnection
+              run: |
+                  COSMOS_CONNECTION_STRING=$(az cosmosdb keys list \
+                    --name ${{ steps.createResources.outputs.cosmosDbAccountName }} \
+                    --resource-group ${{ steps.createResources.outputs.resourceGroupName }} \
+                    --type connection-strings \
+                    --query "connectionStrings[0].connectionString" \
+                    --output tsv)
+
+                  echo "cosmosConnectionString=$COSMOS_CONNECTION_STRING" >> $GITHUB_OUTPUT
+
             - name: Set secrets using gh CLI
               env:
                   GH_TOKEN: ${{ secrets.PA_TOKEN }}
@@ -55,3 +71,6 @@ jobs:
                   gh secret set CHAT_COMPLETION_MODEL_DEPLOYMENT --body "${{ steps.createResources.outputs.chatCompletionModelDeployment }}"
                   gh secret set WEB_MAGEAPI_RESOURCE_NAME --body "${{ steps.createResources.outputs.webMageApiResourceName }}"
                   gh secret set WEB_API_MAGE_ENDPOINT --body "${{ steps.createResources.outputs.webApiMageEndpoint }}"
+                  gh secret set SKYRIM_DATABASE_NAME --body "${{ steps.createResources.outputs.skyrimDatabaseName }}"
+                  gh secret set SKYRIM_CONTAINE_NAME --body "${{ steps.createResources.outputs.skyrimContaineName }}"
+                  gh secret set COSMOSDB_ACCOUNT_NAME --body "${{ steps.createResources.outputs.cosmosDbAccountName }}"

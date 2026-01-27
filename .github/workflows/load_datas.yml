@@ -1,4 +1,4 @@
-name: Create Indexes
+name: Load Datas
 
 on:
   workflow_dispatch:
@@ -68,3 +68,33 @@ jobs:
         run: |
           uv run python main.py
         working-directory: utility/loader
+
+  load_crime_database:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+
+      - name: Install the latest version of uv
+        uses: astral-sh/setup-uv@v7
+
+      - name: Install dependencies
+        run: |
+          uv sync
+        working-directory: utility/indexer
+
+      - name: Run index creation script
+        env:
+          # Add your environment variables here
+          SEARCH_ENDPOINT: ${{ secrets.SEARCH_ENDPOINT }}
+          SEARCH_API_KEY: ${{ secrets.SEARCH_API_KEY }}
+          SEARCH_API_VERSION: ${{ secrets.SEARCH_API_VERSION }}
+        run: |
+          uv run python main.py
+        working-directory: utility/indexer
