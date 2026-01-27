@@ -93,8 +93,8 @@ jobs:
         env:
           # Add your environment variables here
           COSMOS_DB_CNX_STRING: ${{ secrets.COSMOS_CONNECTION_STRING }}
-          DATABASE_ID: ${{ secrets.SKYRIM_DATABASE_NAME }}
-          CONTAINER_ID: ${{ secrets.SKYRIM_CONTAINE_NAME }}
+          DATABASE_ID: "skyrim"
+          CONTAINER_ID: "crime"
           PARTITION_KEY: "crimeType"
         run: |
           uv run python main.py
