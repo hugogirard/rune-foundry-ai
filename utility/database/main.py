@@ -14,15 +14,12 @@ def main():
     load_dotenv(override=True)
     
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    #project_root = os.path.join(script_dir, '..', '..')
     data_file_path = os.path.join(script_dir,'data.json')
-    #data_file_path = os.path.join(project_root, 'index', 'indexes.json')
 
     with open(data_file_path,'r') as file:
         documents = json.load(file)
 
     COSMOS_DB_CNX_STRING = os.getenv('COSMOS_DB_CNX_STRING')
-    #COSMOS_DB_KEY = os.getenv('')
     DATABASE_ID = os.getenv('DATABASE_ID')
     CONTAINER_ID = os.getenv('CONTAINER_ID')
     PARTITION_KEY = os.getenv('PARTITION_KEY')

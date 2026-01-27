@@ -1,5 +1,6 @@
 from azure.identity import AzureCliCredential
 from azure.ai.projects import AIProjectClient
+from azure.ai.projects.models import AgentVersionDetails
 from dotenv import load_dotenv
 from pathlib import Path
 from base import AgentConfiguration
@@ -8,6 +9,9 @@ import os
 import importlib
 import inspect
 import asyncio
+import logging
+
+logging.basicConfig(level=logging.INFO)
 
 def discover_agents() -> List[AgentConfiguration]:
     """Discover all agent implementations in the agents directory."""
@@ -47,17 +51,21 @@ async def main():
     agents = discover_agents()
 
     chat_completion_model = os.getenv('AZURE_OPENAI_CHAT_MODEL_COMPLETION')
+    
+    created_agents:List[AgentVersionDetails] = []
 
     for agent_class in agents:
         try:
             agent = agent_class()
             print(f"Configuring {agent_class.__name__}")
-            await agent.configure(project,chat_completion_model)
+            created_agent = await agent.configure(project,chat_completion_model)
+            created_agents.append(created_agent)
         except Exception as e:
             print(f"Error configuring {agent_class.__name__}")
             print(f"Exception: {e}")
 
-    print(len(agents))
+    for a in created_agents:
+        logging.info(f"Agent {a.name} version {a.version} created")
 
 
 if __name__ == "__main__":

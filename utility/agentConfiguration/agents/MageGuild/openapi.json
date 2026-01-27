@@ -1,0 +1,248 @@
+{
+    "openapi": "3.0.0",
+    "paths": {
+        "/api/quest/all": {
+            "get": {
+                "description": "Fetches a complete list of all currently available quests from the mage guild. Only returns quests that are not currently enrolled by any adventurer and are ready to be taken.",
+                "operationId": "QuestController_getAvailableQuest",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved the list of available quests",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Quest"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "summary": "Retrieve all available quests",
+                "tags": [
+                    "Quest Management"
+                ]
+            }
+        },
+        "/api/quest/{id}": {
+            "get": {
+                "description": "Fetches detailed information about a specific quest using its unique identifier. Returns quest details including title, description, difficulty, rewards, and availability status.",
+                "operationId": "QuestController_getQuestById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "description": "Unique identifier of the quest to retrieve",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Quest successfully found and returned",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Quest"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Quest with the specified ID was not found"
+                    }
+                },
+                "summary": "Retrieve a specific quest by ID",
+                "tags": [
+                    "Quest Management"
+                ]
+            }
+        },
+        "/api/quest/enrolled/{adventurerName}": {
+            "get": {
+                "description": "Fetches a complete list of all quests that a specific adventurer has enrolled in. Includes quest enrollment details such as enrollment date, current status (in-progress, completed), and reward claim status.",
+                "operationId": "QuestController_getQuestEnrolled",
+                "parameters": [
+                    {
+                        "name": "adventurerName",
+                        "required": true,
+                        "in": "path",
+                        "description": "Name of the adventurer whose enrolled quests to retrieve",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved list of enrolled quests for the adventurer",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/QuestEnrollement"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "summary": "Retrieve all quests enrolled by an adventurer",
+                "tags": [
+                    "Quest Management"
+                ]
+            }
+        },
+        "/api/quest/enroll": {
+            "post": {
+                "description": "Allows an adventurer to enroll in an available quest from the mage guild. The quest must be available and not currently taken by another adventurer. Upon successful enrollment, the quest becomes unavailable to others and an enrollment record is created with in-progress status.",
+                "operationId": "QuestController_enrollIntoQuest",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "description": "Enrollment details including quest ID and adventurer name",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Enrollement"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successfully enrolled in the quest",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/QuestEnrollement"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Quest is not available or enrollment failed"
+                    }
+                },
+                "summary": "Enroll an adventurer in a quest",
+                "tags": [
+                    "Quest Management"
+                ]
+            }
+        },
+        "/api/quest/cancel": {
+            "post": {
+                "description": "Allows an adventurer to cancel their enrollment in a quest. This removes the enrollment record and makes the quest available again for other adventurers to take. Use this when an adventurer decides not to continue with a quest they previously enrolled in.",
+                "operationId": "QuestController_cancelQuest",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "description": "Quest cancellation details including quest ID and adventurer name",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Enrollement"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Quest enrollment successfully cancelled"
+                    },
+                    "404": {
+                        "description": "Quest enrollment not found"
+                    }
+                },
+                "summary": "Cancel an enrolled quest",
+                "tags": [
+                    "Quest Management"
+                ]
+            }
+        },
+        "/api/quest/complete": {
+            "post": {
+                "description": "Marks an enrolled quest as completed by an adventurer. This updates the quest status to completed, records the completion date, and marks rewards as claimed. The quest can only be completed if the adventurer has an active enrollment for it.",
+                "operationId": "QuestController_completeQuest",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "description": "Quest completion details including quest ID and adventurer name",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Enrollement"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Quest successfully completed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/QuestEnrollement"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Quest cannot be completed - enrollment not found or invalid state"
+                    }
+                },
+                "summary": "Mark a quest as completed",
+                "tags": [
+                    "Quest Management"
+                ]
+            }
+        }
+    },
+    "info": {
+        "title": "Mage Guild API",
+        "description": "Provides all the mage guild quests",
+        "version": "1.0",
+        "contact": {}
+    },
+    "tags": [],
+    "servers": [
+        {
+            "url": "__serverUrl__"
+        }
+    ],
+    "components": {
+        "schemas": {
+            "Quest": {
+                "type": "object",
+                "properties": {}
+            },
+            "QuestEnrollement": {
+                "type": "object",
+                "properties": {}
+            },
+            "Enrollement": {
+                "type": "object",
+                "properties": {
+                    "questId": {
+                        "type": "string",
+                        "description": "The ID of the quest to enroll in"
+                    },
+                    "adventurerName": {
+                        "type": "string",
+                        "description": "The name of the adventurer"
+                    }
+                },
+                "required": [
+                    "questId",
+                    "adventurerName"
+                ]
+            }
+        }
+    }
+}
