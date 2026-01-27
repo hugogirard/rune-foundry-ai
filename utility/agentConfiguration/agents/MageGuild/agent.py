@@ -6,10 +6,16 @@ from azure.ai.projects.models import (
     OpenApiFunctionDefinition,
     OpenApiAnonymousAuthDetails,
 )
+import os
+import json
 
 class MageGuildAgent(AgentConfiguration):
 
     async def configure(self,project_client:AIProjectClient,chat_completion_model:str):
+
+        openapi_path = os.path.join(os.path.dirname(__file__), "openapi.json")
+        with open(openapi_path, 'r') as f:
+            openapi_spec = json.load(f)
 
         definition = PromptAgentDefinition(
             model=chat_completion_model,
