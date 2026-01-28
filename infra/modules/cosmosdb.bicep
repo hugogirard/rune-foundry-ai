@@ -158,6 +158,7 @@ resource containerChat 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/conta
   }
 }
 
+output resourceName string = cosmosDB.name
 output cosmosDbAccountName string = cosmosDB.name
 output skyrimDatabaseName string = dbSkyrim.name
 output skyrimContaineName string = dbSkyrim.name

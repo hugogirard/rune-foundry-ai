@@ -124,6 +124,8 @@ module embeddingnModel 'modules/model-deployment.bicep' = {
 /*******************************
 * Workload resources
 ********************************/
+
+// Hosting API, Custom Agents and Frontend
 module web 'modules/webapp.bicep' = {
   scope: rg
   params: {
@@ -134,6 +136,7 @@ module web 'modules/webapp.bicep' = {
   }
 }
 
+// Needed for Foundry ID
 module storage 'modules/storage.bicep' = {
   scope: rg
   params: {
@@ -142,6 +145,24 @@ module storage 'modules/storage.bicep' = {
   }
 }
 
+// Function to host event workload or MCP Server with Function
+module function 'modules/function.bicep' = {
+  scope: rg
+  params: {
+    location: resourceLocation
+    tags: {
+      SecurityControl: 'Ignore'
+    }
+    appServicePlanName: 'asp-func-${suffix}'
+    applicationInsightResourceName: 'api-${suffix}'
+    cosmosDBResourceName: cosmosdb.outputs.resourceName
+    functionResourceName: 'func-${suffix}'
+    logAnalyticResourceName: 'log-${suffix}'
+    storageName: 'strf${replace(suffix,'-','')}'
+  }
+}
+
+// Security for all instance
 module rbac 'modules/rbac.bicep' = {
   scope: rg
   params: {
