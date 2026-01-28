@@ -181,6 +181,8 @@ output webApiMageEndpoint string = web.outputs.webApiMageEndpoint
 output chatCompletionModelDeployment string = chatCompleteionDeploymentName
 output storageBlobEndpoint string = storage.outputs.blobEndpoint
 
+output functionCrimeResourceName string = function.outputs.functionResourceName
+
 output cosmosDbAccountName string = cosmosdb.outputs.cosmosDbAccountName
 output skyrimDatabaseName string = cosmosdb.outputs.skyrimDatabaseName
 output skyrimContaineName string = cosmosdb.outputs.skyrimContaineName
