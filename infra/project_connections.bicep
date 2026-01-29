@@ -1,5 +1,5 @@
 param projectResourceName string
-param mcpCrimeServerConnectionName string = 'MCPCrimeServer'
+param mcpCrimeServerConnectionName string = 'MCPCrimeServerTool'
 param targetUrlCrimeMCP string
 param crimeMCPServerKey string
 
