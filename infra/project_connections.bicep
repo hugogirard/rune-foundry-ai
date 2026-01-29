@@ -1,9 +1,15 @@
+param foundryResourceName string
 param projectResourceName string
 param mcpCrimeServerConnectionName string = 'MCPCrimeServerTool'
 param targetUrlCrimeMCP string
 param crimeMCPServerKey string
 
+resource foundry 'Microsoft.CognitiveServices/accounts@2025-04-01-preview' existing = {
+  name: foundryResourceName
+}
+
 resource project 'Microsoft.CognitiveServices/accounts/projects@2025-04-01-preview' existing = {
+  parent: foundry
   name: projectResourceName
 }
 

@@ -68,7 +68,7 @@ jobs:
                     --resource-group ${{ steps.createResources.outputs.resourceGroupName }} \
                     --name ${{ github.run_id }} \
                     --template-file ./infra/project_connections.bicep \
-                    --parameters projectResourceName=${{ steps.createResources.outputs.projectResourceName }}  crimeMCPServerKey=${{ steps.getMcpKey.outputs.mcpExtensionKey }} targetUrlCrimeMCP=${{ steps.createResources.outputs.functionCrimeServerMCPEndpoint }} \
+                    --parameters foundryResourceName=${{ steps.createResources.outputs.foundryResourceName }} projectResourceName=${{ steps.createResources.outputs.projectResourceName }}  crimeMCPServerKey=${{ steps.getMcpKey.outputs.mcpExtensionKey }} targetUrlCrimeMCP=${{ steps.createResources.outputs.functionCrimeServerMCPEndpoint }} \
                     --query 'properties.outputs' \
                     --output json > outputs.json
 
