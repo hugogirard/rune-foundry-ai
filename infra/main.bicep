@@ -182,6 +182,9 @@ output chatCompletionModelDeployment string = chatCompleteionDeploymentName
 output storageBlobEndpoint string = storage.outputs.blobEndpoint
 
 output functionCrimeResourceName string = function.outputs.functionResourceName
+output functionCrimeServerMCPEndpoint string = function.outputs.functionCrimeServerMCPEndpoint
+
+output projectResourceName string = foundry.outputs.projectResourceName
 
 output cosmosDbAccountName string = cosmosdb.outputs.cosmosDbAccountName
 output skyrimDatabaseName string = cosmosdb.outputs.skyrimDatabaseName

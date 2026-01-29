@@ -149,3 +149,4 @@ resource crimeMcpServer 'Microsoft.Web/sites@2025-03-01' = {
 }
 
 output functionResourceName string = crimeMcpServer.name
+output functionCrimeServerMCPEndpoint string = 'https://${crimeMcpServer.properties.defaultHostName}/runtime/webhook/mcp'

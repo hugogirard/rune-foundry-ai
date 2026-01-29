@@ -47,6 +47,30 @@ jobs:
                   echo "skyrimDatabaseName=$(jq -r '.skyrimDatabaseName.value' outputs.json)" >> $GITHUB_OUTPUT
                   echo "skyrimContaineName=$(jq -r '.skyrimContaineName.value' outputs.json)" >> $GITHUB_OUTPUT
                   echo "functionCrimeResourceName=$(jq -r '.functionCrimeResourceName.value' outputs.json)" >> $GITHUB_OUTPUT
+                  echo "functionCrimeServerMCPEndpoint=$(jq -r '.functionCrimeServerMCPEndpoint.value' outputs.json)" >> $GITHUB_OUTPUT
+                  echo "projectResourceName=$(jq -r '.projectResourceName.value' outputs.json)" >> $GITHUB_OUTPUT
+
+            - name: Get MCP Extension Key
+              id: getMcpKey
+              run: |
+                  MCP_KEY=$(az functionapp keys list \
+                    --name ${{ steps.createResources.outputs.functionCrimeResourceName }} \
+                    --resource-group ${{ steps.createResources.outputs.resourceGroupName }} \
+                    --query "systemKeys.mcp_extension" \
+                    --output tsv)
+
+                  echo "mcpExtensionKey=$MCP_KEY" >> $GITHUB_OUTPUT
+
+            - name: Create Foundry Connection
+              id: createConnection
+              run: |
+                  az deployment sub create \
+                    --location ${{ env.REGION }} \
+                    --name ${{ github.run_id }} \
+                    --template-file ./infra/project_connections.bicep \
+                    --parameters projectResourceName=${{ steps.createResources.outputs.projectResourceName }}  crimeMCPServerKey=${{ steps.getMcpKey.outputs.mcpExtensionKey }} targetUrlCrimeMCP=${{ steps.createResources.outputs.functionCrimeServerMCPEndpoint }} \
+                    --query 'properties.outputs' \
+                    --output json > outputs.json
 
             - name: Get CosmosDB Connection String
               id: getCosmosConnection
@@ -78,3 +102,4 @@ jobs:
                   gh secret set COSMOSDB_ACCOUNT_NAME --body "${{ steps.createResources.outputs.cosmosDbAccountName }}"
                   gh secret set STORAGE_BLOB_ENDPOINT --body "${{ steps.createResources.outputs.storageBlobEndpoint }}"
                   gh secret set FUNCTION_CRIME_SOURCENAME --body "${{ steps.createResources.outputs.functionCrimeResourceName }}"
+                  gh secret set FUNCTION_CRIME_SERVER_MCPENDPOINT --body "${{ steps.createResources.outputs.functionCrimeServerMCPEndpoint }}"
