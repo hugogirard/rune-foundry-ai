@@ -29,6 +29,9 @@ resource crimeMCPServerConnection 'Microsoft.CognitiveServices/accounts/projects
     useWorkspaceManagedIdentity: false
     authType: 'CustomKeys'
     credentials: credentialMcpServer
+    metadata: {
+      type: 'custom_MCP'
+    }
   }
 }
 
