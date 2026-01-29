@@ -64,8 +64,8 @@ jobs:
             - name: Create Foundry Connection
               id: createConnection
               run: |
-                  az deployment sub create \
-                    --location ${{ env.REGION }} \
+                  az deployment group create \
+                    --resource-group ${{ steps.createResources.outputs.resourceGroupName }} \
                     --name ${{ github.run_id }} \
                     --template-file ./infra/project_connections.bicep \
                     --parameters projectResourceName=${{ steps.createResources.outputs.projectResourceName }}  crimeMCPServerKey=${{ steps.getMcpKey.outputs.mcpExtensionKey }} targetUrlCrimeMCP=${{ steps.createResources.outputs.functionCrimeServerMCPEndpoint }} \
