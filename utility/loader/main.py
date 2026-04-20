@@ -1,5 +1,4 @@
 from dotenv import load_dotenv
-from azure.identity import DefaultAzureCredential
 from azure.core.credentials import AzureKeyCredential
 from azure.search.documents import SearchClient
 from openai import AzureOpenAI
@@ -28,7 +27,7 @@ lore_file_path = os.path.join(project_root, 'dataset', 'lore.json')
 openai = AzureOpenAI(
     azure_endpoint=open_ai_endpoint,
     api_key=open_ai_key,
-    api_version="2024-12-01-preview"
+    api_version=open_ai_version
 )
 
 def embed_document(file_path:str, field_name:str, vector_field_name:str) -> list:
