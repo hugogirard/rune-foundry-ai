@@ -179,6 +179,7 @@ output loreAgentResourceName string = web.outputs.loreAgentResourceName
 output webMageApiResourceName string = web.outputs.webMageApiResourceName
 output webApiMageEndpoint string = web.outputs.webApiMageEndpoint
 output chatCompletionModelDeployment string = chatCompleteionDeploymentName
+output embeddingDeploymentName string = embeddingDeploymentName
 output storageBlobEndpoint string = storage.outputs.blobEndpoint
 
 output functionCrimeResourceName string = function.outputs.functionResourceName
