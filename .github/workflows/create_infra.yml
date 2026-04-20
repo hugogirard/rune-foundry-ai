@@ -49,6 +49,7 @@ jobs:
                   echo "functionCrimeResourceName=$(jq -r '.functionCrimeResourceName.value' outputs.json)" >> $GITHUB_OUTPUT
                   echo "functionCrimeServerMCPEndpoint=$(jq -r '.functionCrimeServerMCPEndpoint.value' outputs.json)" >> $GITHUB_OUTPUT
                   echo "projectResourceName=$(jq -r '.projectResourceName.value' outputs.json)" >> $GITHUB_OUTPUT
+                  echo "embeddingDeploymentName=$(jq -r '.embeddingDeploymentName.value' outputs.json)" >> $GITHUB_OUTPUT
 
             - name: Get MCP Extension Key
               id: getMcpKey
@@ -103,3 +104,18 @@ jobs:
                   gh secret set STORAGE_BLOB_ENDPOINT --body "${{ steps.createResources.outputs.storageBlobEndpoint }}"
                   gh secret set FUNCTION_CRIME_SOURCENAME --body "${{ steps.createResources.outputs.functionCrimeResourceName }}"
                   gh secret set FUNCTION_CRIME_SERVER_MCPENDPOINT --body "${{ steps.createResources.outputs.functionCrimeServerMCPEndpoint }}"
+
+            - name: Set OpenAI secrets using gh CLI
+              env:
+                  GH_TOKEN: ${{ secrets.PA_TOKEN }}
+              run: |
+                  OPENAI_KEY=$(az cognitiveservices account keys list \
+                    --name ${{ steps.createResources.outputs.foundryResourceName }} \
+                    --resource-group ${{ steps.createResources.outputs.resourceGroupName }} \
+                    --query "key1" \
+                    --output tsv)
+
+                  gh secret set OPENAI_ENDPOINT --body "https://${{ steps.createResources.outputs.foundryResourceName }}.openai.azure.com/"
+                  gh secret set OPENAI_KEY --body "$OPENAI_KEY"
+                  gh secret set EMBEDDING_OPENAI_DEPLOYMENT --body "${{ steps.createResources.outputs.embeddingDeploymentName }}"
+                  gh secret set OPENAI_API_VERSION --body "2024-02-01"
