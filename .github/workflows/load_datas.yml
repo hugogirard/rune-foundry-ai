@@ -44,11 +44,24 @@ jobs:
             exit 1
           fi
 
-          SEARCH_ENDPOINT="https://$(az search service show \
+          SEARCH_ENDPOINT=$(az search service show \
             --name "$SEARCH_SERVICE_NAME" \
             --resource-group "$RESOURCE_GROUP_NAME" \
-            --query hostName \
-            --output tsv)"
+            --query endpoint \
+            --output tsv)
+          if [ -z "$SEARCH_ENDPOINT" ]; then
+            SEARCH_HOST_NAME=$(az search service show \
+              --name "$SEARCH_SERVICE_NAME" \
+              --resource-group "$RESOURCE_GROUP_NAME" \
+              --query hostName \
+              --output tsv)
+            SEARCH_ENDPOINT="https://$SEARCH_HOST_NAME"
+          fi
+          SEARCH_ENDPOINT="${SEARCH_ENDPOINT%/}"
+          if ! printf '%s' "$SEARCH_ENDPOINT" | grep -Eq '^https://[^/]+$'; then
+            echo "Unable to resolve a valid Azure AI Search endpoint for service $SEARCH_SERVICE_NAME" >&2
+            exit 1
+          fi
           SEARCH_API_KEY=$(az search admin-key show \
             --service-name "$SEARCH_SERVICE_NAME" \
             --resource-group "$RESOURCE_GROUP_NAME" \
@@ -107,11 +120,24 @@ jobs:
             exit 1
           fi
 
-          SEARCH_ENDPOINT="https://$(az search service show \
+          SEARCH_ENDPOINT=$(az search service show \
             --name "$SEARCH_SERVICE_NAME" \
             --resource-group "$RESOURCE_GROUP_NAME" \
-            --query hostName \
-            --output tsv)"
+            --query endpoint \
+            --output tsv)
+          if [ -z "$SEARCH_ENDPOINT" ]; then
+            SEARCH_HOST_NAME=$(az search service show \
+              --name "$SEARCH_SERVICE_NAME" \
+              --resource-group "$RESOURCE_GROUP_NAME" \
+              --query hostName \
+              --output tsv)
+            SEARCH_ENDPOINT="https://$SEARCH_HOST_NAME"
+          fi
+          SEARCH_ENDPOINT="${SEARCH_ENDPOINT%/}"
+          if ! printf '%s' "$SEARCH_ENDPOINT" | grep -Eq '^https://[^/]+$'; then
+            echo "Unable to resolve a valid Azure AI Search endpoint for service $SEARCH_SERVICE_NAME" >&2
+            exit 1
+          fi
           SEARCH_API_KEY=$(az search admin-key show \
             --service-name "$SEARCH_SERVICE_NAME" \
             --resource-group "$RESOURCE_GROUP_NAME" \
